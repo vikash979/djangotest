@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+    {% block header %}
+    {% endblock header %}
+    {% block css %}
+    {% endblock %}
+    </head>
+    <script>
+
+
+    </script>
+  <!-- <body onload="myfunctio();myFunctionsss(); openPage('NHQ', this, 'orange')" style="background-image: url({% static 'images/banner/mainbg.jpg' %}); font-family: 'Whitney SSm A', 'Whitney SSm B', Arial, sans-ser,Lato' !import;"> -->
+<!-- <div class="overlay"></div> -->
+<body  >
+
+   
+
+        {% block base_content %}
+
+        {% endblock base_content %}
+
+        
+        {% block htmljs %}
+        {% endblock htmljs %}
+    </body>
+</html>

@@ -1,0 +1,146 @@
+{% extends 'test_project/base.html' %}
+{% load static %}
+{% block header %}
+<!DOCTYPE html>
+  <html lang="en">
+<head>
+<title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" type="image/png" href="https://colorlib.com/etc/lf/Login_v10/images/icons/favicon.ico" />
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+ <link rel="STYLESHEET" type="text/css" href="{% static 'fg_membersite.css' %}" />
+    <link rel="STYLESHEET" type="text/css" href="{% static 'csspwdwidget.css' %}" />
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'login/util.css' %} ">
+<link rel="stylesheet" type="text/css" href="{% static 'login/main.css' %}">
+<script>
+$(window).on('load',function(){
+
+  $.ajax({
+       url:  '/testlogin/employeeList/',
+       type: "GET",
+       dataType: "json",
+       //data:{"screenwith":"screenwith"},
+       //data:{"parent_id":"parent_id"},
+        success: function(response){
+
+        for(var i = 0; i <response.length;i++)
+        {
+        	$('#employee_list').append(`<tr><td>${response[i]['employee_name']}</td><td>${response[i]['employee_email']}</td><td>${response[i]['employee_address']}</td><td><a  href="/testlogin/edit/?id=${response[i]['id']}">Edit </a> || <a id="${response[i]['id']}" href="/testlogin/delete/?id=${response[i]['id']}" delete('${response[i]['id']}')>Delete</a></td></tr>`)
+        }
+
+        	}
+
+        })
+})
+</script>
+</head>
+{% endblock header %}
+{% block base_content %}
+<body>
+<div class="limiter">
+<div class="col-12 col-lg-12">
+<div class="wrap-login100 p-t-50 p-b-90">
+<div id='fg_membersite'>
+<form class="text-center border border-light p-5" action="/testlogin/home/" method="post">{% csrf_token %}
+
+    <p class="h4 mb-4">Emplyee</p>
+
+    <!-- Email -->
+    <input type="email" id="defaultLoginFormEmail" name="email" class="form-control mb-4" placeholder="E-mail">
+
+    <!-- Password -->
+    <input type="text" id="defaultLoginFormPassword" name="name" class="form-control mb-4" placeholder="name">
+
+    <input type="text" id="defaultLoginFormAddress" name="address" class="form-control mb-4" placeholder="Address">
+
+    <div class="d-flex justify-content-around">
+        <div>
+            <!-- Remember me -->
+           
+        </div>
+       
+    </div>
+
+    <!-- Sign in button -->
+    <input type="Submit" name="submit" class="btn btn-info btn-block my-4" Value="submit">
+
+    <!-- Register -->
+    
+
+    <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
+    <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
+    <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
+    <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
+
+</form>
+<!-- Default form logi
+</div>
+<!-- client-side Form Validations:
+Uses the excellent form validation script from JavaScript-coder.com-->
+
+<table class="table" id="table">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>email</th>
+        <th>Address</th>
+        <th>Edit / Delete</th>
+      </tr>
+    </thead>
+    <tbody id="employee_list">
+      
+    </tbody>
+  </table>
+
+<script type='text/javascript'>
+// <![CDATA[
+    var pwdwidget = new PasswordWidget('thepwddiv','password');
+    pwdwidget.MakePWDWidget();
+    
+    var frmvalidator  = new Validator("register");
+    frmvalidator.EnableOnPageErrorDisplay();
+    frmvalidator.EnableMsgsTogether();
+    frmvalidator.addValidation("name","req","Please provide your name");
+
+    frmvalidator.addValidation("email","req","Please provide your email address");
+
+    frmvalidator.addValidation("email","email","Please provide a valid email address");
+
+    frmvalidator.addValidation("username","req","Please provide a username");
+    
+    frmvalidator.addValidation("password","req","Please provide a password");
+
+
+    function delete(idd)
+    {
+
+    }
+
+// ]]>
+</script>
+
+</div>
+</div>
+</div>
+<div id="dropDownSelect1"></div>
+
+
+
+</html>
+{% endblock base_content %}
+
+{% block htmljs %}
+{% endblock htmljs %}
